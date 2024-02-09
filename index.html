@@ -10,6 +10,10 @@
     cursor: pointer;
     margin: 5px;
     transition: all 0.3s ease;
+    display: block; /* Ensure buttons are block-level for easier centering */
+    width: fit-content; /* Fit the button's width to its content */
+    margin-left: auto; /* Auto margins for horizontal centering */
+    margin-right: auto;
   }
   .btn-green {
     background-color: #4CAF50;
@@ -25,6 +29,15 @@
     height: auto;
     display: block;
     margin: 0 auto;
+  }
+  
+  /* Media query for devices with width up to 428px */
+  @media (max-width: 428px) {
+    .btn {
+      font-size: 20px; /* Larger text */
+      padding: 15px 30px; /* Larger padding */
+    }
+    /* Additional styles for better mobile appearance can be added here */
   }
 </style>
 </head>
