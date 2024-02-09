@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine</title>
+<style>
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 5px;
+    transition: all 0.3s ease;
+  }
+  .btn-green {
+    background-color: #4CAF50;
+    color: white;
+  }
+  .btn-red {
+    background-color: #f44336;
+    color: white;
+  }
+  img {
+    max-width: 100%;
+    max-height: 400px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+
+<!-- Placeholder image URL will be replaced on button click -->
+<img src="bears.jpg" alt="Initial Image" id="dynamicImage">
+<br>
+<button class="btn btn-green" id="yesBtn">Yes</button>
+<button class="btn btn-red" id="noBtn">No</button>
+
+<div id="message"></div>
+
+<script>
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const dynamicImage = document.getElementById('dynamicImage');
+  const imageUrls = ["bears.jpg", "apu.jpg", "mocha.jpg", "gege.jpg"];
+  const finalImageUrl = "gojo_back.jpg"; // Image for the "Yes" action
+
+  yesBtn.addEventListener('click', () => {
+    dynamicImage.src = finalImageUrl; // Change image to "gojo_back.jpg"
+    document.getElementById('message').innerHTML = '<h1>Yay!</h1>'; // Display message
+    yesBtn.style.display = 'none'; // Hide buttons
+    noBtn.style.display = 'none';
+  });
+
+  let noClickCount = 0;
+  noBtn.addEventListener('click', () => {
+    noClickCount++;
+    noBtn.style.fontSize = parseInt(window.getComputedStyle(noBtn).fontSize) + 2 + 'px';
+    noBtn.style.padding = parseInt(window.getComputedStyle(noBtn).padding) + 5 + 'px';
+
+    if (noClickCount < imageUrls.length) {
+      dynamicImage.src = imageUrls[noClickCount];
+    } else {
+      noClickCount = 0; // Reset to cycle through images again if needed
+    }
+
+    switch (noClickCount) {
+      case 1:
+        noBtn.textContent = 'Are you sure?';
+        break;
+      case 2:
+        noBtn.textContent = 'Are you sureee?';
+        break;
+      case 3:
+        noBtn.style.backgroundColor = '#4CAF50'; // Change to green
+        noBtn.textContent = 'Yes';
+        // Alter the "No" button functionality for the new "Yes" state
+        noBtn.onclick = () => {
+          dynamicImage.src = finalImageUrl; // Change image to "gojo_back.jpg"
+          document.getElementById('message').innerHTML = '<h1>Yay!</h1>'; // Display message
+          yesBtn.style.display = 'none'; // Hide buttons
+          noBtn.style.display = 'none';
+        };
+        break;
+    }
+  });
+</script>
+
+</body>
+</html>
